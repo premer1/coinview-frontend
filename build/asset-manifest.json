@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/coinview/static/css/main.3480c637.css",
+    "main.js": "/coinview/static/js/main.02565789.js",
+    "static/media/coinview.gif": "/coinview/static/media/coinview.c1ddbd5c5b517e6cba7e.gif",
+    "index.html": "/coinview/index.html",
+    "main.3480c637.css.map": "/coinview/static/css/main.3480c637.css.map",
+    "main.02565789.js.map": "/coinview/static/js/main.02565789.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3480c637.css",
+    "static/js/main.02565789.js"
+  ]
+}
