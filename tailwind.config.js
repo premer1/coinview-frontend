@@ -20,6 +20,17 @@ module.exports = {
         input: 'var(--color-bg-input)',
         accent: 'var(--color-text-accent)',
       },
+      colors: {
+        // Add emerald for positive changes (calm green, not aggressive)
+        emerald: {
+          400: '#34d399',
+          500: '#10b981',
+          600: '#059669',
+        },
+      },
+      fontFamily: {
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+      },
     },
   },
   plugins: [],

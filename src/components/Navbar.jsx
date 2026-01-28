@@ -1,481 +1,273 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import ThemeToggle from '../components/ThemeToggle'
-import { AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
-import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import logo from '../images/CvLogo.png'
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
+import { 
+  Bars3Icon, 
+  XMarkIcon, 
+  ChevronDownIcon,
+  HomeIcon,
+  BookOpenIcon,
+  QuestionMarkCircleIcon,
+  StarIcon,
+  WrenchScrewdriverIcon
+} from '@heroicons/react/24/outline';
+import logo from '../images/CvLogo.png';
 
+/**
+ * Navbar - Redesigned for beginner-friendly navigation
+ * Includes: Coins, Learn, Quizzes, Portfolio, Tools
+ */
 const Navbar = () => {
-    const [nav, setNav] = useState(false); 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [learnDropdownOpen, setLearnDropdownOpen] = useState(false);
+  const [quizzesDropdownOpen, setQuizzesDropdownOpen] = useState(false);
+  const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
+  const location = useLocation();
 
-    
-    
-
-    const handleNav = () => {
-        setNav(!nav);
+  const isActive = (path) => {
+    if (path === '/') {
+      return location.pathname === '/' || location.pathname === '/coins';
     }
+    return location.pathname.startsWith(path);
+  };
 
-  
-      
+  const navItems = [
+    { path: '/', label: 'Mynter', icon: HomeIcon },
+    { path: '/learn', label: 'Lær', icon: BookOpenIcon, hasDropdown: true },
+    { path: '/quizzes', label: 'Quizzer', icon: QuestionMarkCircleIcon, hasDropdown: true },
+    { path: '/portfolio', label: 'Portefølje', icon: StarIcon },
+    { path: '/tools', label: 'Verktøy', icon: WrenchScrewdriverIcon, hasDropdown: true },
+  ];
+
+  const learnCategories = [
+    { path: '/learn/getting-started', label: 'Kom i gang' },
+    { path: '/learn/wallets', label: 'Lommebøker' },
+    { path: '/learn/trading', label: 'Handelsgrunnlag' },
+    { path: '/learn/risks', label: 'Risiko & Sikkerhet' },
+    { path: '/learn/blockchain', label: 'Blockchain-grunnlag' },
+  ];
+
+  const quizTypes = [
+    { path: '/quizzes/beginner-check', label: 'Nybegynnersjekk' },
+    { path: '/quizzes/wallet-readiness', label: 'Lommebokklarhet' },
+    { path: '/quizzes/meme-coin-readiness', label: 'Meme-coin klarhet' },
+    { path: '/quizzes/explorer-test', label: 'Blokkutforsker-test' },
+  ];
+
+  const toolsList = [
+    { path: '/tools/converter', label: 'Priskonverter' },
+    { path: '/tools/gas-tracker', label: 'Gass-sporing' },
+    { path: '/tools/ath-atl', label: 'Høyeste/Laveste-sporing' },
+    { path: '/tools/portfolio-calculator', label: 'Porteføljekalkulator' },
+  ];
+
   return (
-    <div className='border-b dark:md:border-gray-600 md:border-gray-200'>
-           <div className='rounded-div border-none flex items-center justify-between h-20 sans-serif'>
+    <>
+      <nav className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="CoinView" className="h-8 rounded-lg" />
+            </Link>
 
-    <Link to='/'>
-      <div className=''>
-      <img src={logo} alt="" className='rounded-lg' />
-      </div>
-    
-    </Link>
-    <Menu as="div" className="relative hidden lg:block text-left">
-      <div>
-        <Menu.Button className="inline-flex border-none w-full justify-center rounded-full border-gray-300 dark:bg-blue-900 bg-blue-600 text-white dark:text-white px-2 py-1 text-sm font-medium shadow-sm dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-          Cryptocurrencies
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        
-        <Menu.Items className="absolute border rounded-b-lg z-10 h-30 w-36 origin-top-right dark:bg-black bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="flex flex-col m-3">
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100 mb-0.5'>
-              {({ active }) => (
-               <Link to='/'>Coins</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100 mb-0.5'>
-              {({ active }) => (
-              <Link>Exchanges</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100'>
-              {({ active }) => (
-                <Link>NFT</Link>
-              )}
-            </Menu.Item>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-    {/* */}
-    <Menu as="div" className="relative hidden lg:block text-left">
-      <div>
-      <Menu.Button className="inline-flex border-none w-full justify-center rounded-full border-gray-300 dark:bg-blue-900 bg-blue-600 text-white dark:text-white px-2 py-1 text-sm font-medium shadow-sm dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-          Exchanges
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute border rounded-b-lg z-10 h-30 w-36 origin-top-right dark:bg-gray-800 bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="flex flex-col m-3">
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100 mb-0.5'>
-              {({ active }) => (
-               <Link to='/'>Coins</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100 mb-0.5'>
-              {({ active }) => (
-              <Link>Exchanges</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100'>
-              {({ active }) => (
-                <Link>NFT</Link>
-              )}
-            </Menu.Item>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-    
-
-    <Menu as="div" className="relative hidden lg:block text-left">
-      <div>
-      <Menu.Button className="inline-flex border-none w-full justify-center rounded-full border-gray-300 dark:bg-blue-900 bg-blue-600 text-white dark:text-white px-2 py-1 text-sm font-medium shadow-sm dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-          NFT
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute border rounded-b-lg z-10 h-30 w-36 origin-top-right dark:bg-gray-800 bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="flex flex-col m-3">
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100 mb-0.5'>
-              {({ active }) => (
-               <Link to='/'>Coins</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100 mb-0.5'>
-              {({ active }) => (
-              <Link>Exchanges</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100'>
-              {({ active }) => (
-                <Link>NFT</Link>
-              )}
-            </Menu.Item>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-    
-    <Menu as="div" className="relative hidden lg:block text-left">
-      <div>
-      <Menu.Button className="inline-flex border-none w-full justify-center rounded-full border-gray-300 dark:bg-blue-900 bg-blue-600 text-white dark:text-white px-2 py-1 text-sm font-medium shadow-sm dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-          NEWS
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute border rounded-b-lg z-10 h-30 w-36 origin-top-right dark:bg-gray-800 bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="flex flex-col m-3">
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100 mb-0.5'>
-              {({ active }) => (
-               <Link to='/'>Coins</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100 mb-0.5'>
-              {({ active }) => (
-              <Link>Exchanges</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100'>
-              {({ active }) => (
-                <Link>NFT</Link>
-              )}
-            </Menu.Item>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-
-    <Menu as="div" className="relative hidden lg:block text-left">
-      <div>
-      <Menu.Button className="inline-flex border-none w-full justify-center rounded-full border-gray-300 dark:bg-blue-900 bg-blue-600 text-white dark:text-white px-2 py-1 text-sm font-medium shadow-sm dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-          Products
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute border rounded-b-lg z-10 h-30 w-36 origin-top-right dark:bg-gray-800 bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="flex flex-col m-3">
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100 mb-0.5'>
-              {({ active }) => (
-               <Link to='/'>CoinView Merch</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100'>
-              {({ active }) => (
-              <Link>API</Link>
-              )}
-            </Menu.Item>
-            <div className='mt-1 border-t flex flex-col'>
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100 mb-0.5'>
-              {({ active }) => (
-                <Link>Bitcoin Live</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='dark:hover:bg-gray-900 hover:bg-gray-100'>
-              {({ active }) => (
-                <Link>Ledger</Link>
-              )}
-            </Menu.Item>
-            </div>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-    <div className='hidden lg:block justify-items-end'>
-        <ThemeToggle />
-    </div>
-  
-
-    {/* Menu Icon */}
-    <div onClick={handleNav} className='block lg:hidden cursor-pointer z-10'>
-        {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
-    </div>
-    { /* Mobile Menu */}
-    <div className={nav
-            ? 'lg:hidden fixed left-0 top-20 flex flex-col justify-between w-full h-[90%] bg-primary ease-in duration-300 z-'
-            : 'fixed left-[-100%] top-20 h-[90%] flex flex-col justify-between ease-in duration-300'
-        }>
-          
-        <Menu as="div" className="relative inline-block text-left">
-      <div>
-        <Menu.Button className="inline-flex border-none w-44 justify-center rounded-md  border border-gray-300 dark:bg-indigo-900 dark:text-white px-4 py-2 text-sm font-medium shadow-sm dark:hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-          Cryptocurrencies
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute border z-10 mt-0.5 h-30 w-36 origin-top-right bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="flex flex-col m-3">
-            <Menu.Item className='hover:bg-gray-900 mb-0.5'>
-              {({ active }) => (
-               <Link to='/'>Coins</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='hover:bg-gray-900 mb-0.5'>
-              {({ active }) => (
-              <Link>Exchanges</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='hover:bg-gray-900'>
-              {({ active }) => (
-                <Link>NFT</Link>
-              )}
-            </Menu.Item>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-    <Menu as="div" className="relative inline-block text-left">
-      <div>
-        <Menu.Button className="inline-flex border-none w-44 justify-center rounded-md  border border-gray-300 dark:bg-indigo-900 dark:text-white px-4 py-2 text-sm font-medium shadow-sm dark:hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-          Exchanges
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute border z-10 mt-0.5 h-30 w-36 origin-top-right bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="flex flex-col m-3">
-            <Menu.Item className='hover:bg-gray-900 mb-0.5'>
-              {({ active }) => (
-               <Link to='/'>Coins</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='hover:bg-gray-900 mb-0.5'>
-              {({ active }) => (
-              <Link>Exchanges</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='hover:bg-gray-900'>
-              {({ active }) => (
-                <Link>NFT</Link>
-              )}
-            </Menu.Item>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-    
-
-    <Menu as="div" className="relative inline-block text-left">
-      <div>
-        <Menu.Button className="inline-flex border-none w-44 justify-center rounded-md border border-gray-300 dark:bg-indigo-900 dark:text-white px-4 py-2 text-sm font-medium shadow-sm dark:hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-          NFT
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute border z-10 mt-0.5 h-30 w-36 origin-top-right bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="flex flex-col m-3">
-            <Menu.Item className='hover:bg-gray-900 mb-0.5'>
-              {({ active }) => (
-               <Link to='/'>Coins</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='hover:bg-gray-900 mb-0.5'>
-              {({ active }) => (
-              <Link>Exchanges</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='hover:bg-gray-900'>
-              {({ active }) => (
-                <Link>NFT</Link>
-              )}
-            </Menu.Item>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-    
-    <Menu as="div" className="relative inline-block text-left">
-      <div>
-        <Menu.Button className="inline-flex border-none w-44 justify-center rounded-md border border-gray-300 dark:bg-indigo-900 dark:text-white px-4 py-2 text-sm font-medium shadow-sm dark:hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-          NEWS
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute border z-10 mt-0.5 h-30 w-36 origin-top-right bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="flex flex-col m-3">
-            <Menu.Item className='hover:bg-gray-900 mb-0.5'>
-              {({ active }) => (
-               <Link to='/'>Coins</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='hover:bg-gray-900 mb-0.5'>
-              {({ active }) => (
-              <Link>Exchanges</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='hover:bg-gray-900'>
-              {({ active }) => (
-                <Link>NFT</Link>
-              )}
-            </Menu.Item>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-
-    <Menu as="div" className="relative inline-block text-left">
-      <div>
-        <Menu.Button className="inline-flex border-none w-44 justify-center rounded-md border border-gray-300 dark:bg-indigo-900 dark:text-white px-4 py-2 text-sm font-medium shadow-sm dark:hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-          Products
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute border z-10 mt-0.5 h-30 w-36 origin-top-right bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="flex flex-col m-3">
-            <Menu.Item className='hover:bg-gray-900 mb-0.5'>
-              {({ active }) => (
-               <Link to='/'>CoinView Merch</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='hover:bg-gray-900 mb-0.5'>
-              {({ active }) => (
-              <Link>API</Link>
-              )}
-            </Menu.Item>
-            <div className='mt-1 border-t flex flex-col'>
-            <Menu.Item className='hover:bg-gray-900 mb-0.5'>
-              {({ active }) => (
-                <Link>Bitcoin Live</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item className='hover:bg-gray-900'>
-              {({ active }) => (
-                <Link>Ledger</Link>
-              )}
-            </Menu.Item>
-            </div>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-    
-        <ul className='w-fill p-4'>        
-            <li className='border-b py-6'>
-                <Link to='/'>Home</Link>
-            </li>
-            <li className='border-b py-6'>
-                <Link to='/'>Account</Link>
-            </li>
-            <li className='border-b py-6'>
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const active = isActive(item.path);
+                
+                if (item.hasDropdown) {
+                  return (
+                    <div
+                      key={item.path}
+                      className="relative"
+                      onMouseEnter={() => {
+                        if (item.path === '/learn') setLearnDropdownOpen(true);
+                        if (item.path === '/quizzes') setQuizzesDropdownOpen(true);
+                        if (item.path === '/tools') setToolsDropdownOpen(true);
+                      }}
+                      onMouseLeave={() => {
+                        setLearnDropdownOpen(false);
+                        setQuizzesDropdownOpen(false);
+                        setToolsDropdownOpen(false);
+                      }}
+                    >
+                      <Link
+                        to={item.path}
+                        className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          active
+                            ? 'text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800'
+                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'
+                        }`}
+                      >
+                        <Icon className="h-4 w-4" />
+                        <span>{item.label}</span>
+                        <ChevronDownIcon className="h-3 w-3" />
+                      </Link>
+                      
+                      {/* Dropdown Menu */}
+                      {(item.path === '/learn' && learnDropdownOpen) && (
+                        <div className="absolute top-full left-0 mt-1 w-56 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-2">
+                          {learnCategories.map((category) => (
+                            <Link
+                              key={category.path}
+                              to={category.path}
+                              className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                            >
+                              {category.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {(item.path === '/quizzes' && quizzesDropdownOpen) && (
+                        <div className="absolute top-full left-0 mt-1 w-56 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-2">
+                          {quizTypes.map((quiz) => (
+                            <Link
+                              key={quiz.path}
+                              to={quiz.path}
+                              className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                            >
+                              {quiz.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {(item.path === '/tools' && toolsDropdownOpen) && (
+                        <div className="absolute top-full left-0 mt-1 w-56 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-2">
+                          {toolsList.map((tool) => (
+                            <Link
+                              key={tool.path}
+                              to={tool.path}
+                              className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                            >
+                              {tool.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+                
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      active
+                        ? 'text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800'
+                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'
+                    }`}
+                  >
+                    <Icon className="h-4 w-4" />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
+              
+              <div className="ml-4 pl-4 border-l border-gray-200 dark:border-gray-700">
                 <ThemeToggle />
-            </li>
-        </ul>
-        <div>
-          
-        </div>
-        
-        <div className='flex flex-col w-full p-4'>            
-            <Link to='/signin'>
-                <button className='w-full my-2 p-3 bg-primary border border-secondary rounded-2xl shadow-xl'>Sign In</button>
-            </Link>
-            <Link to='/signup'>
-                <button className=''>Sign Up</button>
-            </Link>
-        </div>
-    </div>
+              </div>
+            </div>
 
-</div>
-    </div>
-  )
-}
+            {/* Mobile menu button */}
+            <div className="flex items-center gap-4 lg:hidden">
+              <ThemeToggle />
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                aria-label="Veksle meny"
+              >
+                {mobileMenuOpen ? (
+                  <XMarkIcon className="h-6 w-6" />
+                ) : (
+                  <Bars3Icon className="h-6 w-6" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
 
-export default Navbar
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+            <div className="px-4 py-4 space-y-1">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const active = isActive(item.path);
+                
+                return (
+                  <div key={item.path}>
+                    <Link
+                      to={item.path}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                        active
+                          ? 'text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
+                      }`}
+                    >
+                      <Icon className="h-5 w-5" />
+                      <span>{item.label}</span>
+                    </Link>
+                    
+                    {/* Mobile sub-menu */}
+                    {item.path === '/learn' && (
+                      <div className="ml-12 mt-1 space-y-1">
+                        {learnCategories.map((category) => (
+                          <Link
+                            key={category.path}
+                            to={category.path}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                          >
+                            {category.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {item.path === '/quizzes' && (
+                      <div className="ml-12 mt-1 space-y-1">
+                        {quizTypes.map((quiz) => (
+                          <Link
+                            key={quiz.path}
+                            to={quiz.path}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                          >
+                            {quiz.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {item.path === '/tools' && (
+                      <div className="ml-12 mt-1 space-y-1">
+                        {toolsList.map((tool) => (
+                          <Link
+                            key={tool.path}
+                            to={tool.path}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                          >
+                            {tool.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </nav>
+    </>
+  );
+};
+
+export default Navbar;

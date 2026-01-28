@@ -1,7 +1,6 @@
 {
   "name": "coinview-front-end-sept",
   "version": "0.1.0",
-  "homepage": "https://premer1.github.io/coinview-frontend",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -62,8 +61,7 @@
     "https-browserify": "^1.0.0",
     "postcss": "^8.4.17",
     "stream-browserify": "^3.0.0",
-    "tailwindcss": "^3.1.8",
-    "homepage": "https://premer1.github.io/coinview"
+    "tailwindcss": "^3.1.8"
   }
   
 

@@ -12,39 +12,39 @@ const Footer = () => {
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CoinView</span>
             </Link>
             <p className='w-96 mt-4'>
-            CoinView provides a fundamental analysis of the crypto market. In addition to tracking price, volume and market capitalisation, CoinView tracks community growth, open-source code development, major events and on-chain metrics.
+            CoinView gir en grunnleggende analyse av kryptomarkedet. I tillegg til å spore pris, volum og markedsverdi, sporer CoinView samfunnsvekst, utvikling av åpen kildekode, store hendelser og on-chain-metrikker.
             </p>           
             <p className='mt-9'>
-            Help Center | Bug Bounty | Disclaimer |
-            Terms of Service | Privacy Policy | Ad Policy
+            Hjelpesenter | Bug Bounty | Ansvarsfraskrivelse |
+            Tjenestevilkår | Personvernregler | Annonsepolitikk
             </p>
         </div>
         <div class="grid grid-cols-8 gap-8 sm:gap-6 sm:grid-cols-3">
             <div className='ml-2 sm:ml-8'>
-                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Explore</h2>
+                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Utforsk</h2>
                 <ul class="text-gray-600 dark:text-gray-400">
                     <li className='mb-2'>
-                        <Link to='/coin/bitcoin' class="hover:underline">Bitcoin Price</Link>
+                        <Link to='/coin/bitcoin' class="hover:underline">Bitcoin-pris</Link>
                     </li>
                     <li className='mb-2'>
-                        <Link to='/coin/ethereum' class="hover:underline">Ethereum Price</Link>
+                        <Link to='/coin/ethereum' class="hover:underline">Ethereum-pris</Link>
                     </li>
                     <li className='mb-2'>
-                        <Link to='/coin/ethereum' class="hover:underline">DeFi Coins</Link>
+                        <Link to='/coin/ethereum' class="hover:underline">DeFi-mynter</Link>
                     </li>
                     <li className='mb-2'>
-                        <Link to='/coin/ethereum' class="hover:underline">Metaverse Coins</Link>
+                        <Link to='/coin/ethereum' class="hover:underline">Metaverse-mynter</Link>
                     </li>
                     <li className='mb-2'>
-                        <Link to='/coin/ethereum' class="hover:underline">Gaming Coins</Link>
+                        <Link to='/coin/ethereum' class="hover:underline">Spill-mynter</Link>
                     </li>
                     <li className=''>
-                        <Link to='/coin/ethereum' class="hover:underline">Meme Coins</Link>
+                        <Link to='/coin/ethereum' class="hover:underline">Meme-mynter</Link>
                     </li>
                 </ul>
             </div>
             <div className='ml-16 sm:ml-8'>
-                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
+                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Følg oss</h2>
                 <ul class="text-gray-600 dark:text-gray-400">
                     <li className='mb-2'>
                         <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
@@ -64,22 +64,22 @@ const Footer = () => {
                 </ul>
             </div>
             <div className='ml-28 sm:ml-8'>
-                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">About CoinView</h2>
+                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Om CoinView</h2>
                 <ul class="text-gray-600 dark:text-gray-400">
                     <li class="mb-2">
-                        <p>About</p>
+                        <p>Om oss</p>
                     </li>
                     <li className='mb-2'>
-                        <p>Careers</p>
+                        <p>Karrierer</p>
                     </li>
                     <li className='mb-2'>
-                        <p>Company Blog</p>
+                        <p>Bedriftsblogg</p>
                     </li>
                     <li className='mb-2'>
-                        <p>Request Form</p>
+                        <p>Forespørselsskjema</p>
                     </li>
                     <li className='mb-2'>
-                        <p>Advertising</p>
+                        <p>Annonsering</p>
                     </li>
                     <li>
                         <p>FAQ</p>
@@ -90,7 +90,7 @@ const Footer = () => {
     </div>
     <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
     <div class="sm:flex sm:items-center sm:justify-between">
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <Link to='/' class="hover:underline">CoinView™</Link>. All Rights Reserved.
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <Link to='/' class="hover:underline">CoinView™</Link>. Alle rettigheter reservert.
         </span>
         <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
             <a href="https://twitter.com/CoinView_eth" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
