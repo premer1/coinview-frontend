@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { CurrencyContext } from '../context/CurrencyContext';
-import CoinCard from '../components/CoinCard';
 import { 
   StarIcon,
   BellIcon,

@@ -10,8 +10,6 @@ const CurrencySelector = ({ currency, onCurrencyChange }) => {
     { code: 'nok', symbol: 'NOK', name: 'Norsk krone' },
   ];
 
-  const currentCurrency = currencies.find(c => c.code === currency) || currencies[0];
-
   return (
     <div className="relative">
       <select

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { 
   CheckCircleIcon, 
   XCircleIcon,
@@ -21,22 +21,8 @@ const shuffleArray = (array) => {
   return indexed;
 };
 
-/**
- * Quiz - Interactive knowledge tests for crypto beginners
- * One question at a time with progress tracking and immediate feedback
- */
-const Quiz = () => {
-  const { quizType } = useParams();
-  const navigate = useNavigate();
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [answers, setAnswers] = useState({});
-  const [showResult, setShowResult] = useState(false);
-  const [showExplanation, setShowExplanation] = useState(false);
-  const [shuffledQuestions, setShuffledQuestions] = useState([]);
-
-  // Quiz data structure - all in Norwegian
-  const quizzes = {
+// Quiz data structure - all in Norwegian (moved outside component to avoid dependency issues)
+const quizzes = {
     'beginner-check': {
       title: 'Nybegynnersjekk',
       description: 'Test din forståelse av diagrammer, priser og grunnleggende konsepter',
@@ -406,7 +392,20 @@ const Quiz = () => {
         }
       ]
     }
-  };
+};
+
+/**
+ * Quiz - Interactive knowledge tests for crypto beginners
+ * One question at a time with progress tracking and immediate feedback
+ */
+const Quiz = () => {
+  const { quizType } = useParams();
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [answers, setAnswers] = useState({});
+  const [showResult, setShowResult] = useState(false);
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [shuffledQuestions, setShuffledQuestions] = useState([]);
 
   const quiz = quizzes[quizType];
 
@@ -424,7 +423,7 @@ const Quiz = () => {
       });
       setShuffledQuestions(shuffled);
     }
-  }, [quizType]);
+  }, [quiz]);
 
   if (!quiz) {
     return (

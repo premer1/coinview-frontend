@@ -1,7 +1,5 @@
 import React from 'react';
 import {
-  LineChart,
-  Line,
   Area,
   AreaChart,
   XAxis,
@@ -69,7 +67,6 @@ const PriceChart = ({ data, period, currentPrice, priceChange24h, currency = 'us
   // Custom tooltip
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-      const data = payload[0].payload;
       return (
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 shadow-lg">
           <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">

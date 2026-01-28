@@ -1,0 +1,17 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"
+
+# Use the newer Ubuntu 22.04 build image (replaces deprecated Focal)
+[build.image]
+  ubuntu = "22.04"
+
+# Redirects for React Router - all routes to index.html for SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

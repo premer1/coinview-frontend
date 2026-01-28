@@ -9,7 +9,6 @@ const CoinCalculator = ({ coinSymbol, currentPrice, currency = 'usd' }) => {
   const [coinAmount, setCoinAmount] = useState('');
   const [currencyAmount, setCurrencyAmount] = useState('');
 
-  const currencySymbol = currency.toUpperCase();
   const currencyLabel = currency === 'nok' ? 'NOK' : 'USD';
 
   const handleCoinChange = (e) => {

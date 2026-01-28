@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { 
   ChevronRightIcon, 
-  BookOpenIcon,
-  CheckCircleIcon,
   InformationCircleIcon
 } from '@heroicons/react/24/outline';
 

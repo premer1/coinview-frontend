@@ -30,16 +30,6 @@ const SearchBar = ({ coins, onSearch }) => {
     if (onSearch) onSearch(value);
   };
   
-  const handlePopularClick = (coinName) => {
-    const coin = coins?.find(c => 
-      c.name.toLowerCase() === coinName.toLowerCase()
-    );
-    if (coin) {
-      setSearchText('');
-      setShowResults(false);
-    }
-  };
-  
   return (
     <div className="relative max-w-2xl mx-auto">
       {/* Search Input */}
