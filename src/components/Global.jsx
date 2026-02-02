@@ -35,7 +35,7 @@ const Global = () => {
   };
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 py-3">
+    <div className="hidden md:block bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 py-3">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-center gap-6 md:gap-8 text-sm flex-wrap">
           <div>

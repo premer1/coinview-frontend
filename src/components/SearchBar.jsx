@@ -36,10 +36,10 @@ const SearchBar = ({ coins, onSearch }) => {
           value={searchText}
           onChange={handleSearchChange}
           onFocus={() => searchText && setShowResults(true)}
-          placeholder="Søk etter Bitcoin, Ethereum eller hvilken som helst mynt..."
-          className="w-full px-6 py-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          placeholder="Søk mynter (f.eks. Bitcoin, Ethereum)"
+          className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
         />
-        <MagnifyingGlassIcon className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+        <MagnifyingGlassIcon className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
       </div>
 
       {!searchText && (

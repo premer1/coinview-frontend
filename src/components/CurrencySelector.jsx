@@ -6,20 +6,20 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline';
  */
 const CurrencySelector = ({ currency, onCurrencyChange }) => {
   const currencies = [
-    { code: 'usd', symbol: 'USD', name: 'Amerikansk dollar' },
-    { code: 'nok', symbol: 'NOK', name: 'Norsk krone' },
+    { code: 'usd', symbol: 'USD' },
+    { code: 'nok', symbol: 'NOK' },
   ];
 
   return (
-    <div className="relative">
+    <div className="relative shrink-0">
       <select
         value={currency}
         onChange={(e) => onCurrencyChange(e.target.value)}
-        className="appearance-none bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 pr-8 text-sm font-medium text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+        className="appearance-none bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 pr-8 text-sm font-medium text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer min-w-[5rem]"
       >
         {currencies.map((curr) => (
           <option key={curr.code} value={curr.code}>
-            {curr.symbol} - {curr.name}
+            {curr.symbol}
           </option>
         ))}
       </select>
