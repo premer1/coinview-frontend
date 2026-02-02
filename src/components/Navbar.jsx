@@ -11,8 +11,6 @@ import {
   StarIcon,
   WrenchScrewdriverIcon
 } from '@heroicons/react/24/outline';
-import logo from '../images/CvLogo.png';
-
 /**
  * Navbar - Redesigned for beginner-friendly navigation
  * Includes: Coins, Learn, Quizzes, Portfolio, Tools
@@ -68,7 +66,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <img src={logo} alt="CoinView" className="h-8 rounded-lg" />
+              <span className="font-fredoka text-xl font-semibold text-gray-900 dark:text-white">Din Krypto</span>
             </Link>
 
             {/* Desktop Navigation */}

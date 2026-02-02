@@ -81,8 +81,8 @@ const PriceChart = ({ data, period, currentPrice, priceChange24h, currency = 'us
     return null;
   };
 
-  // Color based on price change
-  const lineColor = priceChange24h > 0 ? '#10b981' : '#64748b';
+  // Green for positive, red for negative
+  const lineColor = priceChange24h > 0 ? '#10b981' : '#ef4444';
 
   return (
     <div className="w-full">
@@ -96,7 +96,7 @@ const PriceChart = ({ data, period, currentPrice, priceChange24h, currency = 'us
         </div>
         <div className="text-right">
           <p className="text-sm text-gray-500 dark:text-gray-400">24t endring</p>
-          <p className={`text-xl font-semibold ${priceChange24h > 0 ? 'text-emerald-600' : 'text-gray-500'}`}>
+          <p className={`text-xl font-semibold ${priceChange24h > 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`}>
             {priceChange24h > 0 ? '+' : ''}{priceChange24h.toFixed(2)}%
           </p>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { CurrencyContext } from '../context/CurrencyContext';
 import SearchBar from '../components/SearchBar';
 import CoinCard from '../components/CoinCard';
@@ -8,10 +8,13 @@ import CurrencySelector from '../components/CurrencySelector';
  * Home - Redesigned with card-based layout
  * Beginner-friendly, clean, minimal design
  */
+const ROWS_PER_PAGE_OPTIONS = [10, 25, 50, 100];
+
 const Home = ({ coins, loading }) => {
   const [favorites, setFavorites] = useState([]);
-  const [showAll, setShowAll] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const { currency, setCurrency } = useContext(CurrencyContext);
 
   // Filter coins based on search
@@ -25,8 +28,23 @@ const Home = ({ coins, loading }) => {
     );
   }) || [];
 
-  // Show top 10 by default, or all if "View All" clicked
-  const displayCoins = showAll ? filteredCoins : filteredCoins.slice(0, 10);
+  const totalPages = Math.max(1, Math.ceil(filteredCoins.length / rowsPerPage));
+  const displayCoins = filteredCoins.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
+  const handleRowsPerPageChange = (e) => {
+    const value = Number(e.target.value);
+    setRowsPerPage(value);
+    setPage(0);
+  };
+
+  const handlePageChange = (newPage) => {
+    setPage(Math.max(0, Math.min(newPage, totalPages - 1)));
+  };
+
+  // Reset to first page when search changes
+  useEffect(() => {
+    setPage(0);
+  }, [searchQuery]);
 
   const handleToggleFavorite = (coinId) => {
     setFavorites(prev =>
@@ -64,19 +82,53 @@ const Home = ({ coins, loading }) => {
       {/* Top Coins Section */}
       <section className="py-8 px-4 pb-16">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-              {searchQuery ? 'Søkeresultater' : 'Topp kryptovalutaer'}
-            </h2>
-            {!showAll && !searchQuery && filteredCoins.length > 10 && (
-              <button
-                onClick={() => setShowAll(true)}
-                className="text-sm text-blue-600 dark:text-blue-400 hover:underline font-medium"
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white text-center mb-4">
+            {searchQuery ? 'Søkeresultater' : 'Topp kryptovalutaer'}
+          </h2>
+
+          {/* Pagination - compact, top */}
+          {!loading && filteredCoins.length > 0 && (
+            <div className="max-w-4xl mx-auto mb-4 flex items-center justify-center gap-2 flex-wrap">
+              <select
+                value={rowsPerPage}
+                onChange={handleRowsPerPageChange}
+                className="rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-xs px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
-                Vis alle →
-              </button>
-            )}
-          </div>
+                {ROWS_PER_PAGE_OPTIONS.map((n) => (
+                  <option key={n} value={n}>{n}</option>
+                ))}
+              </select>
+              <span className="text-xs text-gray-500 dark:text-gray-400">per side</span>
+              <span className="text-xs text-gray-400 dark:text-gray-500">|</span>
+              <div className="flex items-center gap-0.5 text-xs">
+                {page > 0 && (
+                  <>
+                    <button
+                      onClick={() => handlePageChange(page - 1)}
+                      className="min-w-[1.5rem] px-1.5 py-0.5 rounded text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                    >
+                      {page}
+                    </button>
+                    <span className="px-0.5 text-gray-400">←</span>
+                  </>
+                )}
+                <span className="min-w-[1.5rem] px-1.5 py-0.5 rounded bg-blue-600 dark:bg-blue-500 text-white font-medium text-center">
+                  {page + 1}
+                </span>
+                {page < totalPages - 1 && (
+                  <>
+                    <span className="px-0.5 text-gray-400">→</span>
+                    <button
+                      onClick={() => handlePageChange(page + 1)}
+                      className="min-w-[1.5rem] px-1.5 py-0.5 rounded text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                    >
+                      {page + 2}
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Card Grid - Single column */}
           {loading ? (

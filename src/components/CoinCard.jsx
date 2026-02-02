@@ -7,18 +7,17 @@ import TrendIndicator from './TrendIndicator';
 import SimpleChart from './SimpleChart';
 
 /**
- * CoinCard - Modern, minimal card design for displaying cryptocurrency data
- * Replaces the dense table row with a beginner-friendly card layout
+ * CoinCard - Card layout for a single coin
  */
 const CoinCard = ({ coin, isFavorite, onToggleFavorite }) => {
   const { currency } = useContext(CurrencyContext);
-  
+
   if (!coin) return null;
 
   const formatPrice = (price) => {
-    if (!price && price !== 0) return 'N/A';
+    if (price == null) return 'N/A';
     const symbol = currency === 'nok' ? 'kr' : '$';
-    return `${symbol}${price.toLocaleString(undefined, {
+    return `${symbol}${Number(price).toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: price < 1 ? 6 : 2,
     })}`;
@@ -27,15 +26,19 @@ const CoinCard = ({ coin, isFavorite, onToggleFavorite }) => {
   return (
     <Link to={`/coin/${coin.id}`} className="block">
       <div className="group bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600">
-        {/* Horizontal layout: Coin info, Price, Chart */}
         <div className="flex items-center justify-between gap-4">
-          {/* Left: Coin info */}
           <div className="flex items-center gap-3 flex-shrink-0">
-            <img 
-              src={coin.image} 
-              alt={coin.name}
-              className="w-8 h-8 rounded-full"
-            />
+            {coin.image ? (
+              <img
+                src={coin.image}
+                alt={coin.name}
+                className="w-8 h-8 rounded-full"
+              />
+            ) : (
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-medium">
+                {coin.symbol?.slice(0, 2).toUpperCase()}
+              </span>
+            )}
             <div>
               <h3 className="font-semibold text-base text-gray-900 dark:text-white">
                 {coin.name}
@@ -45,8 +48,7 @@ const CoinCard = ({ coin, isFavorite, onToggleFavorite }) => {
               </p>
             </div>
           </div>
-          
-          {/* Center: Price and trend */}
+
           <div className="flex-1 text-right">
             <p className="text-lg font-semibold text-gray-900 dark:text-white">
               {formatPrice(coin.current_price)}
@@ -55,20 +57,17 @@ const CoinCard = ({ coin, isFavorite, onToggleFavorite }) => {
               <TrendIndicator value={coin.price_change_percentage_24h} />
             </div>
           </div>
-          
-          {/* Right: Chart and favorite */}
+
           <div className="flex items-center gap-3 flex-shrink-0">
-            {/* Mini Chart */}
             {coin.sparkline_in_7d?.price && (
               <div className="w-20 h-10 opacity-60 group-hover:opacity-100 transition-opacity">
-                <SimpleChart 
+                <SimpleChart
                   data={coin.sparkline_in_7d.price}
                   isPositive={coin.price_change_percentage_24h > 0}
                 />
               </div>
             )}
-            
-            {/* Favorite button */}
+
             {onToggleFavorite && (
               <button
                 onClick={(e) => {

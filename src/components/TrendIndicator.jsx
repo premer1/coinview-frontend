@@ -11,10 +11,10 @@ const TrendIndicator = ({ value }) => {
   const isPositive = value > 0;
   const absValue = Math.abs(value);
   
-  // Use emerald for positive (calm green), gray for negative (not aggressive red)
+  // Green for positive, red for negative
   const colorClass = isPositive 
     ? 'text-emerald-600 dark:text-emerald-400' 
-    : 'text-gray-500 dark:text-gray-400';
+    : 'text-red-600 dark:text-red-400';
   
   return (
     <div className={`flex items-center gap-1 ${colorClass}`}>

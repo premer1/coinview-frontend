@@ -30,6 +30,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        fredoka: ['Fredoka', 'sans-serif'],
       },
     },
   },

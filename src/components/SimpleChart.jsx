@@ -14,10 +14,10 @@ const SimpleChart = ({ data, isPositive = true }) => {
     );
   }
 
-  // Use subtle colors - emerald for positive, gray for negative
+  // Green for positive, red for negative
   const lineColor = isPositive 
     ? '#10b981' // emerald-500
-    : '#64748b'; // slate-500
+    : '#ef4444'; // red-500
 
   return (
     <div className="h-full w-full">
